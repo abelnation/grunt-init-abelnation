@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
         // Test product integration in production or stage
         integration: {
-            src: '<%= paths.tests %>/integration/*.casper.js',,
+            src: '<%= paths.tests %>/integration/*.casper.js',
             options: {
                 force: true,
                 casperjsOptions: [
