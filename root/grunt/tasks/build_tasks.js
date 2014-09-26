@@ -11,6 +11,11 @@ module.exports = function(grunt) {
         'clean',
         'lint',
 
+        {% if (/[yY]/.test(grunt_contrib_sass)) { %}'sass',{% } %}
+        {% if (/[yY]/.test(grunt_contrib_concat)) { %}'concat',{% } %}
+        {% if (/[yY]/.test(grunt_contrib_uglify)) { %}'uglify',{% } %}
+        {% if (/[yY]/.test(grunt_line_remover)) { %}'lineremover',{% } %}
+
         // FILL ME IN
     ]);
 
