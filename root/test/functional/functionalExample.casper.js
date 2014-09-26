@@ -8,7 +8,7 @@ casper.test.setUp(function() {
 });
 
 casper.test.begin("http://google.com", 1, function suite(test) {
-    casper.thenOpen(load_url, function() {
+    casper.thenOpen("http://google.com", function() {
         var toPassToBrowser = "hi from casper!";
 
         var msgFromBrowser = casper.evaluate(function(passedArg) {

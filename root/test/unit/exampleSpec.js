@@ -26,14 +26,14 @@ describe("Example Functions", function() {
 
     describe("bar", function() {
         it("adds 5", function() {
-            expect(bar(1)).toEqual(1+5);
-            expect(bar(2)).toEqual(2+5);
-            expect(bar(3)).toEqual(3+5);
-            expect(bar(4)).toEqual(4+5);
-            expect(bar(5)).toEqual(5+5);
-            expect(bar(6)).toEqual(6+5);
-            expect(bar(7)).toEqual(7+5);
-            expect(bar(8)).toEqual(8+5);
+            expect(bar(1)).toEqual(1 + 5);
+            expect(bar(2)).toEqual(2 + 5);
+            expect(bar(3)).toEqual(3 + 5);
+            expect(bar(4)).toEqual(4 + 5);
+            expect(bar(5)).toEqual(5 + 5);
+            expect(bar(6)).toEqual(6 + 5);
+            expect(bar(7)).toEqual(7 + 5);
+            expect(bar(8)).toEqual(8 + 5);
         });
     });
 

@@ -1,0 +1,38 @@
+{
+  "name": "grunt-init-abelnation",
+  "description": "General-purpose configurable grunt-init template",
+  "version": "0.1.0",
+  "homepage": "https://github.com/abelnation/grunt-init-abelnation",
+  "author": {
+    "name": "Abel Allison",
+    "email": "abel.allison@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/abelnation/grunt-init-abelnation.git"
+  },
+  "bugs": "https://github.com/abelnation/grunt-init-abelnation/issues",
+  "licenses": [],
+  "scripts": {
+    "lint": "grunt lint",
+    "setup": "./script/setup.sh"
+  },
+  "paths": {
+    "src": ".",
+    "grunt": "./grunt"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "underscore": "^1.7.0",
+    "load-grunt-tasks": "^0.6.0",
+    "glob": "^4.0.6",
+    "grunt-timer": "^0.5.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-dev-update": "^0.8.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-bump": "^0.0.15",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jscs": "^0.7.1"
+  },
+  "keywords": []
+}

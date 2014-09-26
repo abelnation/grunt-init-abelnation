@@ -31,10 +31,10 @@ exports.template = function(grunt, init, done) {
 
     'grunt-bump':            { 'default': true,  'version': '^0.0.15', 'taskName': 'bump' },
     // 'grunt-contrib-clean':   { 'default': true,  'version': '^0.6.0',  'taskName': 'clean' },
-    'grunt-contrib-jshint':  { 'default': true,  'version': '^0.6.0',  'taskName': 'jshint',       'fileDeps': ['.jshint', 'src/.jshint', 'test/.jshint'] },
+    'grunt-contrib-jshint':  { 'default': true,  'version': '^0.10.0',  'taskName': 'jshint',       'fileDeps': [ '.jshint', 'src/.jshint', 'test/.jshint' ] },
     // 'grunt-contrib-watch':   { 'default': true,  'version': '^0.6.1',  'taskName': 'watch' },
     // 'grunt-dev-update':      { 'default': true,  'version': '^0.8.0',  'taskName': 'devUpdate' },
-    'grunt-jscs':            { 'default': true,  'version': '^0.7.1',  'taskName': 'jscs',         'fileDeps': ['src/.jscs.jquery.json'] },
+    'grunt-jscs':            { 'default': true,  'version': '^0.7.1',  'taskName': 'jscs',         'fileDeps': [ 'src/.jscs.jquery.json' ] },
     'grunt-shell':           { 'default': true,  'version': '^0.6.0',  'taskName': 'shell' },
     'grunt-contrib-concat':  { 'default': false, 'version': '^0.5.0',  'taskName': 'concat' },
     'grunt-contrib-connect': { 'default': false, 'version': '^0.8.0',  'taskName': 'connect' },
@@ -43,7 +43,7 @@ exports.template = function(grunt, init, done) {
     'grunt-contrib-uglify':  { 'default': false, 'version': '^0.6.0',  'taskName': 'uglify' },
     'grunt-contrib-sass':    { 'default': false, 'version': '^0.7.3',  'taskName': 'sass' },
     'grunt-line-remover':    { 'default': false, 'version': '^0.0.2',  'taskName': 'lineremover' },
-    'grunt-casperjs':        { 'default': false, 'version': '^2.0.0',  'taskName': 'casperjs',     'fileDeps': ['test/functional/functionalExample.casper.js','test/integration/integrationExample.casper.js'] },
+    'grunt-casperjs':        { 'default': false, 'version': '^2.0.0',  'taskName': 'casperjs',     'fileDeps': [ 'test/functional/functionalExample.casper.js', 'test/integration/integrationExample.casper.js' ] },
     'grunt-jasmine-node':    { 'default': false, 'version': '^0.2.1',  'taskName': 'jasmine_node' },
     'grunt-jsdoc':           { 'default': false, 'version': '^0.6.0',  'taskName': 'jsdoc' },
   };
@@ -63,10 +63,10 @@ exports.template = function(grunt, init, done) {
   ];
   // add prompt for each grunt tasks
   _.each(gruntTasks, function(value, key) {
-    prompts.push(init.prompt(key.replace(/-/g,'_'), value.default ? 'y' : 'n'));
+    prompts.push(init.prompt(key.replace(/-/g, '_'), value.default ? 'y' : 'n'));
   });
 
-  init.process({type: 'abelnation'}, prompts, function(err, props) {
+  init.process({ type: 'abelnation' }, prompts, function(err, props) {
 
     // A few additional properties.
     props.paths = {
@@ -80,8 +80,9 @@ exports.template = function(grunt, init, done) {
     props.dependencies = {};
     props.devDependencies = {
       "underscore": "^1.7.0",
-      "load-grunt-tasks": "^0.4.0",
-      "grunt-timer": "~0.5.2",
+      "load-grunt-tasks": "^0.6.0",
+      "glob": "^4.0.6",
+      "grunt-timer": "^0.5.2",
       'grunt-contrib-watch': '^0.6.1',
       'grunt-dev-update': '^0.8.0',
       'grunt-contrib-clean': '^0.6.0',
@@ -93,7 +94,7 @@ exports.template = function(grunt, init, done) {
       'setup': './script/setup.sh',
     };
     _.each(gruntTasks, function(value, key) {
-      if ( /[yY](es)?/i.test(props[key.replace(/-/g,'_')]) ) {
+      if ( /[yY](es)?/i.test(props[key.replace(/-/g, '_')]) ) {
         props.devDependencies[key] = gruntTasks[key].version;
       }
     });
@@ -106,7 +107,7 @@ exports.template = function(grunt, init, done) {
 
     // don't copy grunt task configs for disabled tasks
     _.each(gruntTasks, function(value, key) {
-      if ( !/[yY](es)?/i.test(props[key.replace(/-/g,'_')]) ) {
+      if ( !/[yY](es)?/i.test(props[key.replace(/-/g, '_')]) ) {
         delete files['grunt/options/' + value.taskName + ".js"];
         if ( _.has(value, 'fileDeps') ) {
           

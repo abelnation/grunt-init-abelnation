@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
     grunt.registerTask('lint', [
-        {% if (/[yY]/.test(grunt_dev_update)) { %}'devUpdate',{% } %}
+        'devUpdate',
         {% if (/[yY]/.test(grunt_contrib_jshint)) { %}'jshint',{% } %}
         {% if (/[yY]/.test(grunt_jscs)) { %}'jscs',{% } %}
         'todos',
