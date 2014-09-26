@@ -27,11 +27,13 @@ exports.template = function(grunt, init, done) {
   var _ = grunt.util._;
 
   var gruntTasks = {
+    // commented lines are always included
+
     'grunt-bump':            { 'default': true,  'version': '^0.0.15', 'taskName': 'bump' },
-    'grunt-contrib-clean':   { 'default': true,  'version': '^0.6.0',  'taskName': 'clean' },
+    // 'grunt-contrib-clean':   { 'default': true,  'version': '^0.6.0',  'taskName': 'clean' },
     'grunt-contrib-jshint':  { 'default': true,  'version': '^0.6.0',  'taskName': 'jshint',       'fileDeps': ['.jshint', 'src/.jshint', 'test/.jshint'] },
-    'grunt-contrib-watch':   { 'default': true,  'version': '^0.6.1',  'taskName': 'watch' },
-    'grunt-dev-update':      { 'default': true,  'version': '^0.8.0',  'taskName': 'devUpdate' },
+    // 'grunt-contrib-watch':   { 'default': true,  'version': '^0.6.1',  'taskName': 'watch' },
+    // 'grunt-dev-update':      { 'default': true,  'version': '^0.8.0',  'taskName': 'devUpdate' },
     'grunt-jscs':            { 'default': true,  'version': '^0.7.1',  'taskName': 'jscs',         'fileDeps': ['src/.jscs.jquery.json'] },
     'grunt-shell':           { 'default': true,  'version': '^0.6.0',  'taskName': 'shell' },
     'grunt-contrib-concat':  { 'default': false, 'version': '^0.5.0',  'taskName': 'concat' },
@@ -80,6 +82,10 @@ exports.template = function(grunt, init, done) {
       "underscore": "^1.7.0",
       "load-grunt-tasks": "^0.4.0",
       "grunt-timer": "~0.5.2",
+      'grunt-contrib-watch': '^0.6.1',
+      'grunt-dev-update': '^0.8.0',
+      'grunt-contrib-clean': '^0.6.0',
+      'grunt-bump': '^0.0.15',
     };
     props.scripts = {
       'test': 'grunt test',
