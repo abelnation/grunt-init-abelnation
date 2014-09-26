@@ -13,13 +13,13 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test-functional', [
         {% if (/[yY]/.test(grunt_casperjs)) { %}
-        'connect:casperjs'
+        'connect:casperjs',
         'casperjs:functional',
         {% } %}
     ]);
     grunt.registerTask('test-integration', [
         {% if (/[yY]/.test(grunt_casperjs)) { %}
-        'connect:casperjs'
+        'connect:casperjs',
         'casperjs:integration',
         {% } %}
     ]);
@@ -27,6 +27,6 @@ module.exports = function(grunt) {
     grunt.registerTask('test', [
         'test-unit',
         'test-functional',
-        'test-integration'
+        'test-integration',
     ]);
 };
