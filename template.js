@@ -61,7 +61,7 @@ exports.template = function(grunt, init, done) {
   ];
   // add prompt for each grunt tasks
   _.each(gruntTasks, function(value, key) {
-    prompts.push(init.prompt(key, value.default ? 'y' : 'n'));
+    prompts.push(init.prompt(key.replace(/-/g,'_'), value.default ? 'y' : 'n'));
   });
 
   init.process({type: 'abelnation'}, prompts, function(err, props) {
@@ -87,7 +87,7 @@ exports.template = function(grunt, init, done) {
       'setup': './script/setup.sh',
     };
     _.each(gruntTasks, function(value, key) {
-      if ( /[yY](es)?/i.test(props[key]) ) {
+      if ( /[yY](es)?/i.test(props[key.replace(/-/g,'_')]) ) {
         props.devDependencies[key] = gruntTasks[key].version;
       }
     });
@@ -100,7 +100,7 @@ exports.template = function(grunt, init, done) {
 
     // don't copy grunt task configs for disabled tasks
     _.each(gruntTasks, function(value, key) {
-      if ( !/[yY](es)?/i.test(props[key]) ) {
+      if ( !/[yY](es)?/i.test(props[key.replace(/-/g,'_')]) ) {
         delete files['grunt/options/' + value.taskName + ".js"];
         if ( _.has(value, 'fileDeps') ) {
           
@@ -114,6 +114,8 @@ exports.template = function(grunt, init, done) {
 
     // Add properly-named license files.
     init.addLicenseFiles(files, props.licenses);
+
+    console.log(JSON.stringify(props, null, 2));
 
     // Actually copy (and process) files.
     init.copyAndProcess(files, props, { noProcess: 'libs/**' });
