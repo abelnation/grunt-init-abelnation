@@ -10,5 +10,23 @@
   "unused": false,
   "boss": true,
   "eqnull": true,
-  "node": true
+  "node": true,
+  "predef": [
+    "$",
+    "jQuery",
+    "define",
+    "require",
+    "casper",
+    "jasmine",
+    "module",
+    "exports",
+    "it",
+    "beforeEach",
+    "afterEach",
+    "describe",
+    "jasmine",
+    "expect",
+    "spyOn",
+    "phantom"
+  ]
 }

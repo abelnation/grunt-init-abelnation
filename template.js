@@ -27,20 +27,23 @@ exports.template = function(grunt, init, done) {
   var _ = grunt.util._;
 
   var gruntTasks = {
-    'grunt-bump':            { default: true,  version: '^0.0.15', 'taskName': 'bump' },
-    'grunt-contrib-clean':   { default: true,  version: '^0.6.0',  'taskName': 'clean' },
-    'grunt-contrib-jshint':  { default: true,  version: '^0.6.0',  'taskName': 'jshint' },
-    'grunt-contrib-watch':   { default: true,  version: '^0.6.1',  'taskName': 'watch' },
-    'grunt-dev-update':      { default: true,  version: '^0.8.0',  'taskName': 'devUpdate' },
-    'grunt-jscs':            { default: true,  version: '^0.7.1',  'taskName': 'jscs' },
-    'grunt-shell':           { default: true,  version: '^0.6.0',  'taskName': 'shell' },
-    'grunt-contrib-concat':  { default: false, version: '^0.5.0',  'taskName': 'concat' },
-    'grunt-contrib-connect': { default: false, version: '^0.8.0',  'taskName': 'connect' },
-    'grunt-contrib-copy':    { default: false, version: '^0.6.0',  'taskName': 'copy' },
-    'grunt-contrib-jasmine': { default: false, version: '^0.8.0',  'taskName': 'jasmine' },
-    'grunt-contrib-uglify':  { default: false, version: '^0.6.0',  'taskName': 'uglify' },
-    'grunt-jasmine-node':    { default: false, version: '^0.2.1',  'taskName': 'jasmine_node' },
-    'grunt-jsdoc':           { default: false, version: '^0.6.0',  'taskName': 'jsdoc' },
+    'grunt-bump':            { 'default': true,  'version': '^0.0.15', 'taskName': 'bump' },
+    'grunt-contrib-clean':   { 'default': true,  'version': '^0.6.0',  'taskName': 'clean' },
+    'grunt-contrib-jshint':  { 'default': true,  'version': '^0.6.0',  'taskName': 'jshint',       'fileDeps': ['.jshint', 'src/.jshint', 'test/.jshint'] },
+    'grunt-contrib-watch':   { 'default': true,  'version': '^0.6.1',  'taskName': 'watch' },
+    'grunt-dev-update':      { 'default': true,  'version': '^0.8.0',  'taskName': 'devUpdate' },
+    'grunt-jscs':            { 'default': true,  'version': '^0.7.1',  'taskName': 'jscs',         'fileDeps': ['src/.jscs.jquery.json'] },
+    'grunt-shell':           { 'default': true,  'version': '^0.6.0',  'taskName': 'shell' },
+    'grunt-contrib-concat':  { 'default': false, 'version': '^0.5.0',  'taskName': 'concat' },
+    'grunt-contrib-connect': { 'default': false, 'version': '^0.8.0',  'taskName': 'connect' },
+    'grunt-contrib-copy':    { 'default': false, 'version': '^0.6.0',  'taskName': 'copy' },
+    'grunt-contrib-jasmine': { 'default': false, 'version': '^0.8.0',  'taskName': 'jasmine' },
+    'grunt-contrib-uglify':  { 'default': false, 'version': '^0.6.0',  'taskName': 'uglify' },
+    'grunt-contrib-sass':    { 'default': false, 'version': '^0.7.3',  'taskName': 'sass' },
+    'grunt-line-remover':    { 'default': false, 'version': '^0.0.2',  'taskName': 'lineremover' },
+    'grunt-casperjs':        { 'default': false, 'version': '^2.0.0',  'taskName': 'casperjs',     'fileDeps': ['test/functional/functionalExample.casper.js','test/integration/integrationExample.casper.js'] },
+    'grunt-jasmine-node':    { 'default': false, 'version': '^0.2.1',  'taskName': 'jasmine_node' },
+    'grunt-jsdoc':           { 'default': false, 'version': '^0.6.0',  'taskName': 'jsdoc' },
   };
 
   var prompts = [
@@ -66,6 +69,7 @@ exports.template = function(grunt, init, done) {
     // A few additional properties.
     props.paths = {
       'src': './src',
+      'build': './build',
       'tests': './test',
       'grunt': './grunt',
       'script': './script',
@@ -75,6 +79,7 @@ exports.template = function(grunt, init, done) {
     props.devDependencies = {
       "underscore": "^1.7.0",
       "load-grunt-tasks": "^0.4.0",
+      "grunt-timer": "~0.5.2",
     };
     props.scripts = {
       'test': 'grunt test',
@@ -82,7 +87,6 @@ exports.template = function(grunt, init, done) {
       'setup': './script/setup.sh',
     };
     _.each(gruntTasks, function(value, key) {
-      console.log(key + ": " + props[key]);
       if ( /[yY](es)?/i.test(props[key]) ) {
         props.devDependencies[key] = gruntTasks[key].version;
       }
@@ -98,6 +102,13 @@ exports.template = function(grunt, init, done) {
     _.each(gruntTasks, function(value, key) {
       if ( !/[yY](es)?/i.test(props[key]) ) {
         delete files['grunt/options/' + value.taskName + ".js"];
+        if ( _.has(value, 'fileDeps') ) {
+          
+          // go through and remove any file from files that matches fileSrc
+          _.each(value.fileDeps, function(fileSrcToRemove) {
+            if (_.has(files, fileSrcToRemove)) { delete files[fileSrcToRemove]; }
+          });
+        }
       }
     });
 
